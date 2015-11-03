@@ -1,7 +1,4 @@
 <resources>
     <string name="app_name">Social Login</string>
     <string name="action_settings">Settings</string>
-    <string name="facebook_app_id">258516957620026</string>
-    <string name="twitter_consumer_key">UhRMshC7nKlaXmd8mNLa7YQtk</string>
-    <string name="twitter_consumer_secret">vuxxoysoPwmq5jQ4PuSnj4THN1XhmlePaPektiBeUqRJmImfTK</string>
 </resources>

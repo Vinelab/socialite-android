@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SocialLogin.iml" filepath="$PROJECT_DIR$/SocialLogin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Socialite.iml" filepath="$PROJECT_DIR$/Socialite.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialite/socialite.iml" filepath="$PROJECT_DIR$/socialite/socialite.iml" />
     </modules>
   </component>
 </project>

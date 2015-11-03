@@ -1,4 +1,4 @@
-package com.vinelab.android.sociallogin.socialite;
+package com.vinelab.android.socialite;
 
 /**
  * Created by Nabil Souk on 10/29/2015.

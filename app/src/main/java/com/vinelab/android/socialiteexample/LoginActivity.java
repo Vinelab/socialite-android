@@ -1,4 +1,4 @@
-package com.vinelab.android.sociallogin;
+package com.vinelab.android.socialiteexample;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,12 +8,12 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-import com.vinelab.android.sociallogin.socialite.SocialiteCredentials;
-import com.vinelab.android.sociallogin.socialite.SocialiteUtils.SOCIALITE_PROVIDER;
-import com.vinelab.android.sociallogin.socialite.facebook.FacebookLoginProvider;
-import com.vinelab.android.sociallogin.socialite.listeners.SocialiteLoginListener;
-import com.vinelab.android.sociallogin.socialite.listeners.SocialiteUserStateListener;
-import com.vinelab.android.sociallogin.socialite.twitter.TwitterLoginProvider;
+import com.vinelab.android.socialite.SocialiteCredentials;
+import com.vinelab.android.socialite.SocialiteUtils;
+import com.vinelab.android.socialite.login.facebook.FacebookLoginProvider;
+import com.vinelab.android.socialite.login.listeners.SocialiteLoginListener;
+import com.vinelab.android.socialite.login.listeners.SocialiteUserStateListener;
+import com.vinelab.android.socialite.login.twitter.TwitterLoginProvider;
 
 public class LoginActivity extends Activity {
     ProgressDialog pdLoader;
@@ -56,12 +56,12 @@ public class LoginActivity extends Activity {
         // check if user is already logged in
         FacebookLoginProvider.getInstance().isUserLoggedIn(new SocialiteUserStateListener() {
             @Override
-            public void onLoggedIn(SOCIALITE_PROVIDER provider, SocialiteCredentials credentials) {
+            public void onLoggedIn(SocialiteUtils.SOCIALITE_PROVIDER provider, SocialiteCredentials credentials) {
                 loginListener.onSuccess(provider, credentials);
             }
 
             @Override
-            public void onLoggedOut(SOCIALITE_PROVIDER provider) {
+            public void onLoggedOut(SocialiteUtils.SOCIALITE_PROVIDER provider) {
                 // show loader
                 displayLoader();
                 // login
@@ -76,12 +76,12 @@ public class LoginActivity extends Activity {
         // check if user is already logged in
         TwitterLoginProvider.getInstance().isUserLoggedIn(new SocialiteUserStateListener() {
             @Override
-            public void onLoggedIn(SOCIALITE_PROVIDER provider, SocialiteCredentials credentials) {
+            public void onLoggedIn(SocialiteUtils.SOCIALITE_PROVIDER provider, SocialiteCredentials credentials) {
                 loginListener.onSuccess(provider, credentials);
             }
 
             @Override
-            public void onLoggedOut(SOCIALITE_PROVIDER provider) {
+            public void onLoggedOut(SocialiteUtils.SOCIALITE_PROVIDER provider) {
                 // show loader
                 displayLoader();
                 // login
@@ -94,7 +94,7 @@ public class LoginActivity extends Activity {
 
     SocialiteLoginListener loginListener = new SocialiteLoginListener() {
         @Override
-        public void onSuccess(SOCIALITE_PROVIDER provider, SocialiteCredentials credentials) {
+        public void onSuccess(SocialiteUtils.SOCIALITE_PROVIDER provider, SocialiteCredentials credentials) {
             // hide loader
             dismissLoader();
             // show result
@@ -102,7 +102,7 @@ public class LoginActivity extends Activity {
         }
 
         @Override
-        public void onCancel(SOCIALITE_PROVIDER provider) {
+        public void onCancel(SocialiteUtils.SOCIALITE_PROVIDER provider) {
             // hide loader
             dismissLoader();
             // show result
@@ -110,7 +110,7 @@ public class LoginActivity extends Activity {
         }
 
         @Override
-        public void onError(SOCIALITE_PROVIDER provider, String error) {
+        public void onError(SocialiteUtils.SOCIALITE_PROVIDER provider, String error) {
             // hide loader
             dismissLoader();
             // show result

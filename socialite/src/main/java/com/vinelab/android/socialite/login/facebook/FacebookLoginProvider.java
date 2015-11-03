@@ -1,4 +1,4 @@
-package com.vinelab.android.sociallogin.socialite.facebook;
+package com.vinelab.android.socialite.login.facebook;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,9 +13,9 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.vinelab.android.sociallogin.socialite.SocialiteUtils;
-import com.vinelab.android.sociallogin.socialite.listeners.SocialiteLoginListener;
-import com.vinelab.android.sociallogin.socialite.listeners.SocialiteUserStateListener;
+import com.vinelab.android.socialite.SocialiteUtils;
+import com.vinelab.android.socialite.login.listeners.SocialiteLoginListener;
+import com.vinelab.android.socialite.login.listeners.SocialiteUserStateListener;
 
 import java.util.Collection;
 

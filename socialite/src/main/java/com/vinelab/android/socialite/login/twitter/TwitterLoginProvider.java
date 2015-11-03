@@ -1,4 +1,4 @@
-package com.vinelab.android.sociallogin.socialite.twitter;
+package com.vinelab.android.socialite.login.twitter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,10 +13,10 @@ import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
-import com.vinelab.android.sociallogin.R;
-import com.vinelab.android.sociallogin.socialite.SocialiteUtils;
-import com.vinelab.android.sociallogin.socialite.listeners.SocialiteLoginListener;
-import com.vinelab.android.sociallogin.socialite.listeners.SocialiteUserStateListener;
+import com.vinelab.android.socialite.R;
+import com.vinelab.android.socialite.SocialiteUtils;
+import com.vinelab.android.socialite.login.listeners.SocialiteLoginListener;
+import com.vinelab.android.socialite.login.listeners.SocialiteUserStateListener;
 
 import io.fabric.sdk.android.Fabric;
 

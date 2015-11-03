@@ -1,6 +1,6 @@
-package com.vinelab.android.sociallogin.socialite.twitter;
+package com.vinelab.android.socialite.login.twitter;
 
-import com.vinelab.android.sociallogin.socialite.SocialiteCredentials;
+import com.vinelab.android.socialite.SocialiteCredentials;
 
 /**
  * Created by Nabil Souk on 10/29/2015.

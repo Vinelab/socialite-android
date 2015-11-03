@@ -1,6 +1,6 @@
-package com.vinelab.android.sociallogin.socialite.facebook;
+package com.vinelab.android.socialite.login.facebook;
 
-import com.vinelab.android.sociallogin.socialite.SocialiteCredentials;
+import com.vinelab.android.socialite.SocialiteCredentials;
 
 /**
  * Created by Nabil Souk on 10/29/2015.

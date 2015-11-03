@@ -1,9 +1,9 @@
-package com.vinelab.android.sociallogin.socialite.listeners;
+package com.vinelab.android.socialite.login.listeners;
 
 import android.support.annotation.Nullable;
 
-import com.vinelab.android.sociallogin.socialite.SocialiteCredentials;
-import com.vinelab.android.sociallogin.socialite.SocialiteUtils.SOCIALITE_PROVIDER;
+import com.vinelab.android.socialite.SocialiteCredentials;
+import com.vinelab.android.socialite.SocialiteUtils.SOCIALITE_PROVIDER;
 
 /**
  * Created by Nabil Souk on 10/29/2015.
