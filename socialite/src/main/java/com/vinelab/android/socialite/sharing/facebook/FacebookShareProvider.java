@@ -13,6 +13,7 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.MessageDialog;
 import com.facebook.share.widget.ShareDialog;
+import com.vinelab.android.socialite.FacebookConfig;
 import com.vinelab.android.socialite.R;
 import com.vinelab.android.socialite.SocialiteUtils;
 import com.vinelab.android.socialite.sharing.listeners.SocialiteShareListener;
@@ -28,8 +29,6 @@ public class FacebookShareProvider {
     private static FacebookShareProvider shareProvider;
     private CallbackManager callbackManager;
     private SocialiteShareListener shareListener;
-    private final SocialiteUtils.SOCIALITE_PROVIDER provider = SocialiteUtils.SOCIALITE_PROVIDER.FACEBOOK;
-    private final int REQUEST_CODE = 23;
 
     private FacebookShareProvider() {
         initialize();
@@ -67,7 +66,7 @@ public class FacebookShareProvider {
             ShareLinkContent linkContent = createLinkContent(contentUrl, contentTitle, imageUrl, contentDescription);
             ShareDialog shareDialog = new ShareDialog(activity);
             // set the request code to trigger the callback
-            shareDialog.registerCallback(callbackManager, shareCallback, REQUEST_CODE);
+            shareDialog.registerCallback(callbackManager, shareCallback, FacebookConfig.SHARE_REQUEST_CODE);
             shareDialog.show(linkContent);
         }
         else {
@@ -95,7 +94,7 @@ public class FacebookShareProvider {
             ShareLinkContent linkContent = createLinkContent(contentUrl, contentTitle, imageUrl, contentDescription);
             MessageDialog messageDialog = new MessageDialog(activity);
             // set the request code to trigger the callback
-            messageDialog.registerCallback(callbackManager, shareCallback, REQUEST_CODE);
+            messageDialog.registerCallback(callbackManager, shareCallback, FacebookConfig.SHARE_REQUEST_CODE);
             messageDialog.show(linkContent);
         }
         else {
@@ -162,7 +161,7 @@ public class FacebookShareProvider {
             // create extras
             FacebookShareExtras extras = new FacebookShareExtras(postId);
             // broadcast
-            shareListener.onSuccess(provider, extras);
+            shareListener.onSuccess(FacebookConfig.provider, extras);
         }
     }
 
@@ -171,13 +170,13 @@ public class FacebookShareProvider {
      * @param error The error message returned by the SDK.
      */
     private void broadcastShareError(@Nullable String error) {
-        if(shareListener != null)   shareListener.onError(provider, error);
+        if(shareListener != null)   shareListener.onError(FacebookConfig.provider, error);
     }
 
     /**
      * Broadcasts a share cancelled flag.
      */
     private void broadcastShareCancel() {
-        if(shareListener != null)   shareListener.onCancel(provider);
+        if(shareListener != null)   shareListener.onCancel(FacebookConfig.provider);
     }
 }

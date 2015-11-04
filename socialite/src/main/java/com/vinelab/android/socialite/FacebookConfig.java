@@ -12,6 +12,8 @@ import com.facebook.FacebookSdk;
  * </p>
  */
 public class FacebookConfig {
+    public static SocialiteUtils.SOCIALITE_PROVIDER provider = SocialiteUtils.SOCIALITE_PROVIDER.FACEBOOK;
+    public static int SHARE_REQUEST_CODE = 23;
     /**
      * Initializes the Facebook SDK.
      */
