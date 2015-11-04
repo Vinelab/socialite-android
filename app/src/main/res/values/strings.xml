@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">Social Login</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Socialite</string>
+    <string name="test_login">Test Login</string>
+    <string name="test_sharing">Test Sharing</string>
+    <string name="share_on_fb_feed">Share on Facebook Feed</string>
+    <string name="share_fb_message">Share via Facebook Message</string>
+    <string name="share_whatsapp">Share via Whatsapp</string>
+    <string name="share_email">Share via Email</string>
+    <string name="share_twitter">Share via Twitter</string>
+    <string name="login_fb">Login via Facebook</string>
+    <string name="login_twitter">Login via Twitter</string>
 </resources>

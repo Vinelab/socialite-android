@@ -15,7 +15,7 @@ import com.vinelab.android.socialite.login.listeners.SocialiteLoginListener;
 import com.vinelab.android.socialite.login.listeners.SocialiteUserStateListener;
 import com.vinelab.android.socialite.login.twitter.TwitterLoginProvider;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements View.OnClickListener{
     ProgressDialog pdLoader;
     Handler handler = new Handler();
 
@@ -24,30 +24,27 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // init fb sdk
-        FacebookLoginProvider.getInstance().initialize(getApplicationContext());
-        // init twitter sdk
-        TwitterLoginProvider.getInstance().initialize(getApplicationContext());
-
         // buttons click events
-        findViewById(R.id.btnLoginFacebook).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginViaFacebook();
-            }
-        });
-        findViewById(R.id.btnLoginTwitter).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginViaTwitter();
-            }
-        });
+        findViewById(R.id.btnLoginFacebook).setOnClickListener(this);
+        findViewById(R.id.btnLoginTwitter).setOnClickListener(this);
 
         // progress loader
         pdLoader = new ProgressDialog(this);
         pdLoader.setMessage("Loading...");
         pdLoader.setCancelable(false);
         pdLoader.setIndeterminate(true);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnLoginFacebook:
+                loginViaFacebook();
+                break;
+            case R.id.btnLoginTwitter:
+                loginViaTwitter();
+                break;
+        }
     }
 
     // FACEBOOK //

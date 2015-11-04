@@ -7,13 +7,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login_fb"
-        android:id="@+id/btnLoginFacebook" />
+        android:layout_marginTop="10dp"
+        android:text="@string/test_login"
+        android:id="@+id/btnLogin" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/login_twitter"
-        android:id="@+id/btnLoginTwitter" />
+        android:text="@string/test_sharing"
+        android:id="@+id/btnSharing" />
+
 </LinearLayout>
