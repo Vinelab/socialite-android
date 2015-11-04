@@ -1,7 +1,6 @@
 package com.vinelab.android.socialite.login.facebook;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +9,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.vinelab.android.socialite.SocialiteUtils;
@@ -32,7 +30,9 @@ public class FacebookLoginProvider {
     private SocialiteLoginListener loginListener;
     private final SocialiteUtils.SOCIALITE_PROVIDER provider = SocialiteUtils.SOCIALITE_PROVIDER.FACEBOOK;
 
-    private FacebookLoginProvider() {}
+    private FacebookLoginProvider() {
+        initialize();
+    }
 
     public static FacebookLoginProvider getInstance() {
         if(facebookLoginProvider == null)   facebookLoginProvider = new FacebookLoginProvider();
@@ -40,11 +40,9 @@ public class FacebookLoginProvider {
     }
 
     /**
-     * Initializes the SDK and the components needed for login.
+     * Initializes the tools needed.
      */
-    public void initialize(Context context) {
-        // initialize the SDK
-        FacebookSdk.sdkInitialize(context);
+    private void initialize() {
         // Create the callback manager to handle the login responses
         callbackManager = CallbackManager.Factory.create();
         // register for login callbacks from LoginManager
