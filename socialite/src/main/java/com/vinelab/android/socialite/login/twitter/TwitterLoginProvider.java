@@ -14,7 +14,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.vinelab.android.socialite.R;
-import com.vinelab.android.socialite.SocialiteUtils;
+import com.vinelab.android.socialite.TwitterConfig;
 import com.vinelab.android.socialite.login.listeners.SocialiteLoginListener;
 import com.vinelab.android.socialite.login.listeners.SocialiteUserStateListener;
 
@@ -31,9 +31,10 @@ public class TwitterLoginProvider {
     private static TwitterLoginProvider twitterLoginProvider;
     private TwitterAuthClient twitterAuthClient;
     private SocialiteLoginListener loginListener;
-    private final SocialiteUtils.SOCIALITE_PROVIDER provider = SocialiteUtils.SOCIALITE_PROVIDER.TWITTER;
 
-    private TwitterLoginProvider() {}
+    private TwitterLoginProvider() {
+        initialize();
+    }
 
     public static TwitterLoginProvider getInstance() {
         if(twitterLoginProvider == null)    twitterLoginProvider = new TwitterLoginProvider();
@@ -41,15 +42,9 @@ public class TwitterLoginProvider {
     }
 
     /**
-     * Initializes the SDK with the correspondent Twitter app identifiers.
+     * Initializes the tools needed.
      */
-    public void initialize(Context context) {
-        // get consumer credentials from xml
-        String consumerKey = context.getResources().getString(R.string.twitter_consumer_key);
-        String consumerSecret = context.getResources().getString(R.string.twitter_consumer_secret);
-        // initialize the SDK
-        TwitterAuthConfig authConfig =  new TwitterAuthConfig(consumerKey, consumerSecret);
-        Fabric.with(context, new TwitterCore(authConfig));
+    private void initialize() {
         // auth client
         twitterAuthClient = new TwitterAuthClient();
     }
@@ -68,10 +63,10 @@ public class TwitterLoginProvider {
                 String secret = twitterSession.getAuthToken().secret;
                 // broadcast result
                 TwitterCredentials credentials = new TwitterCredentials(String.valueOf(userId), token, secret);
-                loginStateListener.onLoggedIn(provider, credentials);
+                loginStateListener.onLoggedIn(TwitterConfig.provider, credentials);
             }
             else {
-                loginStateListener.onLoggedOut(provider);
+                loginStateListener.onLoggedOut(TwitterConfig.provider);
             }
         }
     }
@@ -134,7 +129,7 @@ public class TwitterLoginProvider {
     private void broadcastLoginSuccess(String token, String secret, long userId) {
         if(loginListener != null) {
             TwitterCredentials credentials = new TwitterCredentials(String.valueOf(userId), token, secret);
-            loginListener.onSuccess(provider, credentials);
+            loginListener.onSuccess(TwitterConfig.provider, credentials);
         }
     }
 
@@ -143,13 +138,13 @@ public class TwitterLoginProvider {
      * @param error The error message returned by the SDK.
      */
     private void broadcastLoginError(@Nullable String error) {
-        if(loginListener != null)   loginListener.onError(provider, error);
+        if(loginListener != null)   loginListener.onError(TwitterConfig.provider, error);
     }
 
     /**
      * Broadcasts a login cancelled flag.
      */
     private void broadcastLoginCancel() {
-        if(loginListener != null)   loginListener.onCancel(provider);
+        if(loginListener != null)   loginListener.onCancel(TwitterConfig.provider);
     }
 }
