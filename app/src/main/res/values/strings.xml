@@ -11,4 +11,6 @@
     <string name="login_twitter">Login via Twitter</string>
 
     <string name="facebook_app_id">258516957620026</string>
+    <string name="twitter_consumer_key">UhRMshC7nKlaXmd8mNLa7YQtk</string>
+    <string name="twitter_consumer_secret">vuxxoysoPwmq5jQ4PuSnj4THN1XhmlePaPektiBeUqRJmImfTK</string>
 </resources>

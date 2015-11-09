@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">Socialite</string>
-    <string name="twitter_consumer_key">UhRMshC7nKlaXmd8mNLa7YQtk</string>
-    <string name="twitter_consumer_secret">vuxxoysoPwmq5jQ4PuSnj4THN1XhmlePaPektiBeUqRJmImfTK</string>
     <string name="fb_share_present_error">The Facebook share dialog cannot be presented</string>
 </resources>

@@ -18,7 +18,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
         // init fb sdk
         FacebookConfig.initializeSDK(getApplicationContext());
         // init twitter sdk
-        TwitterConfig.initializeKits(getApplicationContext(), true);
+        String consumerKey = getResources().getString(R.string.twitter_consumer_key);
+        String consumerSecret = getResources().getString(R.string.twitter_consumer_secret);
+        TwitterConfig.initializeKits(getApplicationContext(), true, consumerKey, consumerSecret);
         // set click events
         findViewById(R.id.btnLogin).setOnClickListener(this);
         findViewById(R.id.btnSharing).setOnClickListener(this);

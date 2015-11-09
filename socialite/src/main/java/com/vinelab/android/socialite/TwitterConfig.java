@@ -18,18 +18,13 @@ import io.fabric.sdk.android.Fabric;
 public class TwitterConfig {
     public static SocialiteUtils.SOCIALITE_PROVIDER provider = SocialiteUtils.SOCIALITE_PROVIDER.TWITTER;
     public static int COMPOSER_REQUEST_CODE = 24;
-    private static int resConsumerKey = R.string.twitter_consumer_key;
-    private static int resConsumerSecret = R.string.twitter_consumer_secret;
 
     /**
      * Initializes the needed Twitter kits.
      * @param context The application context.
      * @param initComposer indicating whether to initialize the composer kit along or not.
      */
-    public static void initializeKits(Context context, boolean initComposer) {
-        // get consumer credentials from xml
-        String consumerKey = context.getResources().getString(resConsumerKey);
-        String consumerSecret = context.getResources().getString(resConsumerSecret);
+    public static void initializeKits(Context context, boolean initComposer, String consumerKey, String consumerSecret) {
         // initialize the SDK
         TwitterAuthConfig authConfig =  new TwitterAuthConfig(consumerKey, consumerSecret);
         if(initComposer) {
