@@ -9,4 +9,6 @@
     <string name="share_twitter">Share via Twitter</string>
     <string name="login_fb">Login via Facebook</string>
     <string name="login_twitter">Login via Twitter</string>
+
+    <string name="facebook_app_id">258516957620026</string>
 </resources>
