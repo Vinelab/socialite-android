@@ -24,6 +24,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         // set click events
         findViewById(R.id.btnLogin).setOnClickListener(this);
         findViewById(R.id.btnSharing).setOnClickListener(this);
+        findViewById(R.id.btnShareCount).setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +36,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.btnSharing:
                 openSharing();
                 break;
+            case R.id.btnShareCount:
+                openShareCount();
+                break;
         }
     }
 
@@ -44,5 +48,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     void openSharing() {
         startActivity(new Intent(getApplicationContext(), ShareActivity.class));
+    }
+
+    void openShareCount() {
+        startActivity(new Intent(getApplicationContext(), ShareCountActivity.class));
     }
 }
