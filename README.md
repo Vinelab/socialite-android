@@ -2,7 +2,21 @@
 
 Social plugins are used widely in the majority of services, including mobile applications. Some are essential like social sharing, and some - like social login - are becoming more and more trusted and used.
 
-The **socialite** library provides a set of those plugins. Currently, it covers several social logins and sharing, detailed below. 
+The **socialite** library provides a set of those plugins. Currently, it covers several social login, sharing and fetching share counts, detailed below.
+ 
+#### Setup
+
+Add the gradle dependency to your module
+
+```xml
+compile 'com.vinelab.android.socialite:socialite:1.0.0'
+```
+
+In case an error appeared related to Fabric, add the following maven repository.
+
+```xml
+maven { url 'https://maven.fabric.io/repo' }
+```
 
 ## Login
 
@@ -144,8 +158,8 @@ Whatsapp doesn't offer any SDK for Android. Sharing via Whatsapp is done by requ
 
 ```java
 if(!WhatsappShareProvider.shareMessage(activity, message)) {
-            Toast.makeText(getApplicationContext(), "Whatsapp no installed", Toast.LENGTH_SHORT).show();
-        }
+    // inform user that it's not installed
+}
 ```
 
 ### Email Sharing
@@ -155,3 +169,27 @@ This is one of the basics sharing. It's also done by requesting the system to ha
 ```java
 EmailShareProvider.shareMessage(activity, dialogTitle, subject, body);
 ```
+
+## Social Share Count
+
+Many of you are familiar with a counter next to share buttons part of an article page for example. Those numbers are provided directly from the social networks.
+
+In our case, we need the share counts (of a certain web link) on both Facebook and Twitter. For now, we're fetching the data directly from their APIs.
+
+The count will be returned in the [SocialiteShareCount](https://github.com/Vinelab/socialite-android/blob/master/socialite/src/main/java/com/vinelab/android/socialite/sharing/SocialiteShareCount.java) object, containing the link and the sharing count returned from the API.
+
+#### Facebook 
+
+```java
+SocialiteShareCount countFacebook = FacebookShareCountProvider.getShareCount(link);
+```
+
+Note that it is planned to fetch the data from the SDK first if installed in the next versions.
+
+#### Twitter
+
+```java
+SocialiteShareCount countTwitter = TwitterShareCountProvider.getShareCount(link);
+```
+
+The Twitter SDK has no support for fetching such count.
