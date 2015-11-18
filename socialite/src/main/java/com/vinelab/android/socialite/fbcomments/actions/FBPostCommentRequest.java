@@ -4,9 +4,10 @@ import android.os.Bundle;
 
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
-import com.vinelab.android.socialite.fbcomments.entities.FBCommentResponse;
+import com.vinelab.android.socialite.fbcomments.entities.FBPostCommentResponse;
 import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdges;
+import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 
 import org.json.JSONObject;
 
@@ -23,6 +24,7 @@ public class FBPostCommentRequest extends FBGraphRequest {
     public void setProperties(String message) {
         this.params = new Bundle();
         if(message != null) params.putString("message", message);
+        params.putString("fields", FBGraphUtils.COMMENT_FIELDS);
     }
 
     @Override
@@ -30,7 +32,7 @@ public class FBPostCommentRequest extends FBGraphRequest {
         FBGraphResponse graphResponse;
         try {
             String commentId = graphObject.getString("id");
-            graphResponse = new FBCommentResponse(commentId);
+            graphResponse = new FBPostCommentResponse(commentId);
         }
         catch (Exception e) {
             graphResponse = null;

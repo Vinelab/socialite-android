@@ -1,5 +1,8 @@
 package com.vinelab.android.socialite.fbcomments.utils;
 
+import com.vinelab.android.socialite.fbcomments.entities.FBComment;
+import com.vinelab.android.socialite.fbcomments.entities.FBCommentAuthor;
+
 /**
  * Created by Nabil on 11/17/2015.
  */
@@ -10,6 +13,7 @@ public class FBGraphUtils {
     public enum COMMENTS_ORDER {
         CHRONOLOGICAL("chronological"),
         RANKED("ranker"),
+        REVERSE_CHRONOLOGICAL("reverse_chronological"),
         DEFAULT("default");
 
         private final String order;

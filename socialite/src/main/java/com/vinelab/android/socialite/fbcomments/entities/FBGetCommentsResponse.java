@@ -5,14 +5,14 @@ import java.util.ArrayList;
 /**
  * Created by Nabil on 11/16/2015.
  */
-public class FBCommentsResponse extends FBGraphResponse{
+public class FBGetCommentsResponse extends FBGraphResponse{
     final ArrayList<FBComment> comments;
     final boolean hasNext;
     final String after;
     final int totalCount;
     final boolean canComment;
 
-    public FBCommentsResponse(ArrayList<FBComment> comments, boolean hasNext, String after, int totalCount, boolean canComment) {
+    public FBGetCommentsResponse(ArrayList<FBComment> comments, boolean hasNext, String after, int totalCount, boolean canComment) {
         this.comments = comments;
         this.hasNext = hasNext;
         this.after = after;

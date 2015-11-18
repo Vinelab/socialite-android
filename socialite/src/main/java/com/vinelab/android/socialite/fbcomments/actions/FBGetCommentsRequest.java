@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
 import com.vinelab.android.socialite.fbcomments.entities.FBComment;
-import com.vinelab.android.socialite.fbcomments.entities.FBCommentsResponse;
+import com.vinelab.android.socialite.fbcomments.entities.FBGetCommentsResponse;
 import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdges;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
@@ -70,7 +70,7 @@ public class FBGetCommentsRequest extends FBGraphRequest {
                 if(jsonSummary.has("can_comment"))  canComment = jsonSummary.getBoolean("can_comment");
             }
             // create response object
-            graphResponse = new FBCommentsResponse(resultComments, hasNext, after, totalCount, canComment);
+            graphResponse = new FBGetCommentsResponse(resultComments, hasNext, after, totalCount, canComment);
         }
         catch (Exception e) {
             graphResponse = null;

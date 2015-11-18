@@ -11,8 +11,8 @@ import org.json.JSONObject;
 /**
  * Created by Nabil on 11/17/2015.
  */
-public class FBDeleteLikeListener extends FBGraphRequest {
-    public FBDeleteLikeListener(AccessToken accessToken) {
+public class FBDeleteLikeRequest extends FBGraphRequest {
+    public FBDeleteLikeRequest(AccessToken accessToken) {
         super(accessToken);
         setEdge(FBGraphEdges.LIKES);
         setMethod(HttpMethod.DELETE);
