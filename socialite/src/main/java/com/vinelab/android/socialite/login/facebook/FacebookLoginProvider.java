@@ -115,6 +115,12 @@ public class FacebookLoginProvider {
             stateListener.onLoggedOut(provider);
         }
     }
+    /**
+     * Checks if the user has an active session (still logged in).
+     */
+    public boolean isUserLoggedIn() {
+        return (AccessToken.getCurrentAccessToken() != null);
+    }
 
     /**
      * Logs the user in with the requested read permissions.
@@ -127,6 +133,13 @@ public class FacebookLoginProvider {
         loginListener = listener;
         // trigger the login
         LoginManager.getInstance().logInWithReadPermissions(activity, permissions);
+    }
+
+    public void loginWithPublishPermissions(Activity activity, Collection<String> permissions, SocialiteLoginListener listener) {
+        // set the callback listener
+        loginListener = listener;
+        // trigger the login
+        LoginManager.getInstance().logInWithPublishPermissions(activity, permissions);
     }
 
     /**
