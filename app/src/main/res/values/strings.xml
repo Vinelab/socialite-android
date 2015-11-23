@@ -2,6 +2,7 @@
     <string name="app_name">Socialite</string>
     <string name="test_login">Test Login</string>
     <string name="test_sharing">Test Sharing</string>
+    <string name="test_facebook_comments">Test Facebook Comments</string>
     <string name="share_on_fb_feed">Share on Facebook Feed</string>
     <string name="share_fb_message">Share via Facebook Message</string>
     <string name="share_whatsapp">Share via Whatsapp</string>

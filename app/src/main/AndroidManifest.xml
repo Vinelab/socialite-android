@@ -36,6 +36,8 @@
 
         <activity android:name=".ShareCountActivity" >
         </activity>
+        <activity android:name=".FacebookCommentsActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -25,4 +25,11 @@
         android:text="@string/test_sharing"
         android:id="@+id/btnShareCount" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/test_facebook_comments"
+        android:id="@+id/btnFacebookComments" />
+
 </LinearLayout>

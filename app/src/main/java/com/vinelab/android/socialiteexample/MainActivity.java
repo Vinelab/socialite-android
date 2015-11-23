@@ -25,6 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         findViewById(R.id.btnLogin).setOnClickListener(this);
         findViewById(R.id.btnSharing).setOnClickListener(this);
         findViewById(R.id.btnShareCount).setOnClickListener(this);
+        findViewById(R.id.btnFacebookComments).setOnClickListener(this);
     }
 
     @Override
@@ -39,6 +40,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.btnShareCount:
                 openShareCount();
                 break;
+            case R.id.btnFacebookComments:
+                openFacebookComments();
+                break;
         }
     }
 
@@ -52,5 +56,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     void openShareCount() {
         startActivity(new Intent(getApplicationContext(), ShareCountActivity.class));
+    }
+
+    void openFacebookComments() {
+        startActivity(new Intent(getApplicationContext(), FacebookCommentsActivity.class));
     }
 }

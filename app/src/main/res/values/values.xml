@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- facebook comments -->
+    <dimen name="fb_comment_iv_author_res">48dp</dimen>
+    <dimen name="fb_comment_iv_author_margin_lr">8dp</dimen>
+    <dimen name="list_comments_divider_height">6dp</dimen>
+    <dimen name="fb_comment_like_icon_res">18dp</dimen>
+    <dimen name="fb_comment_like_bar_height">28dp</dimen>
+    <dimen name="fb_comment_like_bar_inner_sacing">5dp</dimen>
+
+    <color name="fb_comment_author_placeholder">#FFD3D3D3</color>
+    <color name="fb_comment_blue">#FF40599C</color>
+    <color name="fb_comment_message">#FF000000</color>
+    <color name="fb_comment_grey">#FF8F94B2</color>
+
+    <string name="fb_comment_like">أعجبني</string>
+    <string name="fb_comment_delete_like">إلغاء إعجابي</string>
+    <string name="bullet_character">&#8226;</string>
+    <string name="fb_comment_load_more">المزيد</string>
+</resources>

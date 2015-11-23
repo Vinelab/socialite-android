@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <ImageView
+        android:layout_width="@dimen/fb_comment_iv_author_res"
+        android:layout_height="@dimen/fb_comment_iv_author_res"
+        android:id="@+id/ivAuthor"
+        android:layout_marginLeft="@dimen/fb_comment_iv_author_margin_lr"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/ivAuthor"
+        android:layout_toStartOf="@+id/ivAuthor">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Nabil Souk"
+            android:id="@+id/tvAuthorName"
+            android:textColor="@color/fb_comment_blue"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:layout_marginTop="3dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Comment message"
+            android:id="@+id/tvMessage"
+            android:textColor="@color/fb_comment_message"
+            android:gravity="right"
+            android:layout_marginTop="3dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fb_comment_like_bar_height"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical|right">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2 hours ago"
+                android:id="@+id/tvDate"
+                android:textColor="@color/fb_comment_grey"
+                android:maxWidth="120dp"
+                android:singleLine="true"
+                android:ellipsize="end" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/llLike"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bullet_character"
+                    android:textColor="@color/fb_comment_grey"
+                    android:layout_marginRight="@dimen/fb_comment_like_bar_inner_sacing"
+                    android:layout_marginLeft="@dimen/fb_comment_like_bar_inner_sacing" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/tvLikes"
+                    android:textColor="@color/fb_comment_grey"
+                    android:layout_marginRight="@dimen/fb_comment_like_bar_inner_sacing" />
+
+                <ImageView
+                    android:layout_width="@dimen/fb_comment_like_icon_res"
+                    android:layout_height="@dimen/fb_comment_like_icon_res"
+                    android:id="@+id/ivLike"
+                    android:src="@mipmap/fb_like_icon" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bullet_character"
+                android:textColor="@color/fb_comment_grey"
+                android:layout_marginRight="@dimen/fb_comment_like_bar_inner_sacing"
+                android:layout_marginLeft="@dimen/fb_comment_like_bar_inner_sacing" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/fb_comment_like"
+                android:id="@+id/tvLike"
+                android:textColor="@color/fb_comment_blue"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
