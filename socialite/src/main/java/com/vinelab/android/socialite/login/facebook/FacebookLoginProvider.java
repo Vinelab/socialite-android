@@ -135,6 +135,12 @@ public class FacebookLoginProvider {
         LoginManager.getInstance().logInWithReadPermissions(activity, permissions);
     }
 
+    /**
+     * Logs the user in with the requested publish permissions.
+     * @param activity The activity which is starting the login process.
+     * @param permissions The requested permissions.
+     * @param listener The callback listener.
+     */
     public void loginWithPublishPermissions(Activity activity, Collection<String> permissions, SocialiteLoginListener listener) {
         // set the callback listener
         loginListener = listener;
@@ -153,6 +159,19 @@ public class FacebookLoginProvider {
         loginListener = listener;
         // trigger the login
         LoginManager.getInstance().logInWithReadPermissions(fragment, permissions);
+    }
+
+    /**
+     * Logs the user in with the requested publish permissions.
+     * @param fragment The fragment which is starting the login process.
+     * @param permissions The requested permissions.
+     * @param listener The callback listener.
+     */
+    public void loginWithPublishPermissions(Fragment fragment, Collection<String> permissions, SocialiteLoginListener listener) {
+        // set the callback listener
+        loginListener = listener;
+        // trigger the login
+        LoginManager.getInstance().logInWithPublishPermissions(fragment, permissions);
     }
 
     /**
@@ -191,6 +210,4 @@ public class FacebookLoginProvider {
     private void broadcastLoginCancel() {
         if(loginListener != null)   loginListener.onCancel(provider);
     }
-
-
 }
