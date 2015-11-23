@@ -5,11 +5,21 @@ import com.vinelab.android.socialite.fbcomments.entities.FBCommentAuthor;
 
 /**
  * Created by Nabil on 11/17/2015.
+ *
+ * <p>
+ *     Utility class used by the Facebook Graph operations.
+ * </p>
  */
 public class FBGraphUtils {
     public static final String PERMISSION_PUBLISH_ACTIONS = "publish_actions";
+    /**
+     * The collection of required fields composing a comment object.
+     */
     public static final String COMMENT_FIELDS = "id,from,created_time,message,comment_count,can_comment,can_like,like_count,parent,user_likes";
 
+    /**
+     * Enumeration defining the order of a fetched comments set.
+     */
     public enum COMMENTS_ORDER {
         CHRONOLOGICAL("chronological"),
         RANKED("ranker"),
@@ -27,6 +37,9 @@ public class FBGraphUtils {
         }
     }
 
+    /**
+     * Enumeration of the possible Facebook profile picture types.
+     */
     public enum PROFILE_PICTURE_TYPE {
         SQUARE("square"),
         SMALL("small"),
@@ -55,6 +68,11 @@ public class FBGraphUtils {
         }
     }
 
+    /**
+     * Returns a Facebook profile picture url.
+     * @param id The id of the profile.
+     * @param type The type of the picture.
+     */
     public static String getProfilePicture(String id, PROFILE_PICTURE_TYPE type) {
         String url = null;
         if(id != null && !id.isEmpty()) {

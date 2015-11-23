@@ -1,9 +1,11 @@
 package com.vinelab.android.socialite.fbcomments.entities;
 
-import org.json.JSONObject;
-
 /**
- * Created by Nabil on 11/16/2015.
+ * Created by Nabil Souk on 11/16/2015.
+ *
+ * <p>
+ *     Class holding the data returned after a successful
+ *     Facebook Graph request.
+ * </p>
  */
-public abstract class FBGraphResponse {
-}
+public abstract class FBGraphResponse {}

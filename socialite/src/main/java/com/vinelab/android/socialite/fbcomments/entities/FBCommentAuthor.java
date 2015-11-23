@@ -3,10 +3,13 @@ package com.vinelab.android.socialite.fbcomments.entities;
 import org.json.JSONObject;
 
 /**
- * Created by Nabil on 11/15/2015.
+ * Created by Nabil Souk on 11/15/2015.
+ *
+ * <p>
+ *     Class holding the details of a Facebook comment author.
+ * </p>
  */
 public class FBCommentAuthor {
-    // "name":"Brian Farkas","id":"563653457122327"
     String name;
     String id;
 

@@ -13,12 +13,15 @@ import com.vinelab.android.socialite.fbcomments.listeners.OnPostCommentListener;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 
 /**
- * Created by Nabil on 11/15/2015.
+ * Created by Nabil Souk on 11/15/2015.
+ *
+ * <p>
+ *     Class generating FBGraphRequests.
+ * </p>
  */
-public class FacebookCommentsManager {
-    // comments requests
+public class FBGraphRequestGenerator {
 
-    public void requestComments(String objectId, int limit, final String after, OnGetCommentsListener listener) {
+    /*public void requestComments(String objectId, int limit, final String after, OnGetCommentsListener listener) {
         FBGetCommentsRequest request = generateGetCommentsRequest(objectId, limit, after, listener);
         request.execute();
     }
@@ -41,8 +44,15 @@ public class FacebookCommentsManager {
     public void deleteLike(String objectId, OnLikeRequestListener listener) {
         FBDeleteLikeRequest request = generateDeleteLikeRequest(objectId, listener);
         request.execute();
-    }
+    }*/
 
+    /**
+     * Returns a request to fetch a set of comments.
+     * @param objectId The target ID (post or comment).
+     * @param limit The size of the comments list.
+     * @param after The offset value.
+     * @param listener The callback events listener.
+     */
     public FBGetCommentsRequest generateGetCommentsRequest(String objectId, int limit, final String after, OnGetCommentsListener listener) {
         FBGetCommentsRequest request = new FBGetCommentsRequest(AccessToken.getCurrentAccessToken());
         request.setTarget(objectId);
@@ -51,6 +61,11 @@ public class FacebookCommentsManager {
         return request;
     }
 
+    /**
+     * Returns a request to fetch a single comment details.
+     * @param commentId
+     * @param listener The callback events listener.
+     */
     public FBGetCommentRequest generateGetCommentRequest(String commentId, OnGetCommentListener listener) {
         FBGetCommentRequest request = new FBGetCommentRequest(AccessToken.getCurrentAccessToken());
         request.setTarget(commentId);
@@ -59,14 +74,25 @@ public class FacebookCommentsManager {
         return request;
     }
 
-    public FBPostCommentRequest generatePostCommentRequest(String postId, String comment, OnPostCommentListener listener) {
+    /**
+     * Returns a request to publish a comment.
+     * @param objectId The id of the post or comment.
+     * @param comment The comment's message.
+     * @param listener The callback events listener.
+     */
+    public FBPostCommentRequest generatePostCommentRequest(String objectId, String comment, OnPostCommentListener listener) {
         FBPostCommentRequest request = new FBPostCommentRequest(AccessToken.getCurrentAccessToken());
-        request.setTarget(postId);
+        request.setTarget(objectId);
         request.setProperties(comment);
         request.setGraphRequestListener(listener);
         return request;
     }
 
+    /**
+     * Returns a request to like an object.
+     * @param objectId The id of the object.
+     * @param listener The callback events listener.
+     */
     public FBPostLikeRequest generatePostLikeRequest(String objectId, OnLikeRequestListener listener) {
         FBPostLikeRequest request = new FBPostLikeRequest(AccessToken.getCurrentAccessToken());
         request.setTarget(objectId);
@@ -74,6 +100,11 @@ public class FacebookCommentsManager {
         return request;
     }
 
+    /**
+     * Returns a request to delete a like on an object.
+     * @param objectId The id of the object.
+     * @param listener The callback events listener.
+     */
     public FBDeleteLikeRequest generateDeleteLikeRequest(String objectId, OnLikeRequestListener listener) {
         FBDeleteLikeRequest request = new FBDeleteLikeRequest(AccessToken.getCurrentAccessToken());
         request.setTarget(objectId);

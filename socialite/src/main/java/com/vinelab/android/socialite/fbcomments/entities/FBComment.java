@@ -3,7 +3,11 @@ package com.vinelab.android.socialite.fbcomments.entities;
 import org.json.JSONObject;
 
 /**
- * Created by Nabil on 11/15/2015.
+ * Created by Nabil Souk on 11/15/2015.
+ *
+ * <p>
+ *     Class holding the details of a Facebook comment.
+ * </p>
  */
 public class FBComment {
     String createdTime = null;
@@ -73,5 +77,30 @@ public class FBComment {
 
     public FBComment getParent() {
         return parent;
+    }
+
+    /**
+     * Updates if like flag of the current user on the comment,
+     * and updates the likes count according to the user's action.
+     * @param liked true if the user liked the comment, false if he
+     *              deleted it.
+     */
+    public void updateUserLikeState(boolean liked) {
+        if(liked) {
+            // check if not liked previously
+            if(!userLikes) {
+                // set it and increment count
+                userLikes = true;
+                ++likeCount;
+            }
+        }
+        else {
+            // check if liked previously
+            if(userLikes) {
+                // set it and decrement count
+                userLikes = false;
+                --likeCount;
+            }
+        }
     }
 }

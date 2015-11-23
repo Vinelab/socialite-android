@@ -6,17 +6,17 @@ import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
 import com.vinelab.android.socialite.fbcomments.entities.FBComment;
 import com.vinelab.android.socialite.fbcomments.entities.FBGetCommentResponse;
-import com.vinelab.android.socialite.fbcomments.entities.FBGetCommentsResponse;
 import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
-import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdges;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 /**
- * Created by Nabil on 11/17/2015.
+ * Created by Nabil Souk on 11/17/2015.
+ *
+ * <p>
+ *     Class executing a Get Comment Graph request (fetching the details
+ *     of a comment).
+ * </p>
  */
 public class FBGetCommentRequest extends FBGraphRequest {
 

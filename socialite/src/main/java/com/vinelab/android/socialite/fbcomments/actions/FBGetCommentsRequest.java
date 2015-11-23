@@ -7,7 +7,7 @@ import com.facebook.HttpMethod;
 import com.vinelab.android.socialite.fbcomments.entities.FBComment;
 import com.vinelab.android.socialite.fbcomments.entities.FBGetCommentsResponse;
 import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
-import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdges;
+import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdge;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 
 import org.json.JSONArray;
@@ -16,13 +16,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by Nabil on 11/17/2015.
+ * Created by Nabil Souk on 11/17/2015.
  */
 public class FBGetCommentsRequest extends FBGraphRequest {
 
     public FBGetCommentsRequest(AccessToken accessToken) {
         super(accessToken);
-        setEdge(FBGraphEdges.COMMENTS);
+        setEdge(FBGraphEdge.COMMENTS);
         setMethod(HttpMethod.GET);
     }
 

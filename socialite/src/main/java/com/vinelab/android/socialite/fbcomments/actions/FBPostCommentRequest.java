@@ -4,20 +4,24 @@ import android.os.Bundle;
 
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
-import com.vinelab.android.socialite.fbcomments.entities.FBPostCommentResponse;
 import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
-import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdges;
+import com.vinelab.android.socialite.fbcomments.entities.FBPostCommentResponse;
+import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdge;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 
 import org.json.JSONObject;
 
 /**
- * Created by Nabil on 11/17/2015.
+ * Created by Nabil Souk on 11/17/2015.
+ * <p>
+ *     Class executing a Post Comment Graph request (posting a comment on a post
+ *     of a reply on a comment).
+ * </p>
  */
 public class FBPostCommentRequest extends FBGraphRequest {
     public FBPostCommentRequest(AccessToken accessToken) {
         super(accessToken);
-        setEdge(FBGraphEdges.COMMENTS);
+        setEdge(FBGraphEdge.COMMENTS);
         setMethod(HttpMethod.POST);
     }
 
