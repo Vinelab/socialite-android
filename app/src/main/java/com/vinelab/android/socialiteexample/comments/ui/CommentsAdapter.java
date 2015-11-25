@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vinelab.android.socialite.fbcomments.entities.FBComment;
 import com.vinelab.android.socialite.fbcomments.entities.FBCommentAuthor;
+import com.vinelab.android.socialite.fbcomments.utils.FBDateUtils;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 import com.vinelab.android.socialiteexample.R;
 
@@ -22,6 +22,7 @@ import java.util.ArrayList;
  */
 public class CommentsAdapter extends BaseAdapter {
 //    View vRow;
+    Context context;
     LayoutInflater inflater;
     ArrayList<FBComment> arrayComments = new ArrayList<>();
     OnCommentRowListener rowListener;
@@ -29,6 +30,7 @@ public class CommentsAdapter extends BaseAdapter {
     int resAuthorPlaceholder = R.color.fb_comment_author_placeholder;
 
     public CommentsAdapter(Context context) {
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.strLike = context.getResources().getString(R.string.fb_comment_like);
         this.strDeleteLike = context.getResources().getString(R.string.fb_comment_delete_like);
@@ -110,7 +112,7 @@ public class CommentsAdapter extends BaseAdapter {
             String message = comment.getMessage();
             final boolean isLiked = comment.isUserLikes();
             int likesCount = comment.getLikeCount();
-            String date = comment.getCreatedTime();
+            String date = getFormattedDate(comment.generateTimestamp());
             // display data
             holder.tvMessage.setText(message != null? message: "");
             holder.tvAuthorName.setText(name != null? name: "");
@@ -147,6 +149,18 @@ public class CommentsAdapter extends BaseAdapter {
         }
 
         return v;
+    }
+
+    private String getFormattedDate(long timestamp) {
+        String formattedDate;
+        try {
+            long currentTimeMillis = System.currentTimeMillis();
+            formattedDate = FBDateUtils.getRelativeTimeString(context.getResources(), currentTimeMillis, timestamp);
+        }
+        catch (Exception e) {
+            formattedDate = null;
+        }
+        return formattedDate;
     }
 
     static class ViewHolder {

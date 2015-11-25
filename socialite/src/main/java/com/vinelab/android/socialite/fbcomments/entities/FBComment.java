@@ -2,6 +2,10 @@ package com.vinelab.android.socialite.fbcomments.entities;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by Nabil Souk on 11/15/2015.
  *
@@ -102,5 +106,25 @@ public class FBComment {
                 --likeCount;
             }
         }
+    }
+
+    /**
+     * Generates a timestamp value from the input String following the format
+     * `yyyy-MM-dd'T'HH:mm:ssZ`. If the date String is not valid, timestamp will be 0.
+     */
+    public long generateTimestamp() {
+        long timestamp = 0;
+        // check if str not null
+        if(createdTime != null && !createdTime.isEmpty()) {
+            try {
+                // get Date from String
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+                Date date = sdf.parse(createdTime);
+                // get timestamp from date
+                timestamp = date.getTime();
+            }
+            catch (Exception e) {}
+        }
+        return timestamp;
     }
 }

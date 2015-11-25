@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Socialite</string>
     <string name="fb_share_present_error">The Facebook share dialog cannot be presented</string>
+
+
+    <string name="fb_time_just_now">Just now</string>
+    <string name="fb_time_default">MMMM d, yyyy</string>
+    <string name="fb_time_another_year">MMMM d, yyyy</string>
+    <string name="fb_time_same_year">EEEE, MMMM d \'at\' h:mma</string>
+    <!-- plurals -->
+    <plurals name="fb_time_hours">
+        <item quantity="one">1 hr</item>
+        <item quantity="other">%d hrs</item>
+    </plurals>
+    <plurals name="fb_time_mins">
+        <item quantity="one">1 min</item>
+        <item quantity="other">%d mins</item>
+    </plurals>
 </resources>
