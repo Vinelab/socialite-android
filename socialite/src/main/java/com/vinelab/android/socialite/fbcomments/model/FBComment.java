@@ -1,4 +1,4 @@
-package com.vinelab.android.socialite.fbcomments.entities;
+package com.vinelab.android.socialite.fbcomments.model;
 
 import org.json.JSONObject;
 

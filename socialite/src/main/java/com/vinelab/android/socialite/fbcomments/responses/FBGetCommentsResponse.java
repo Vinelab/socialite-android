@@ -1,4 +1,6 @@
-package com.vinelab.android.socialite.fbcomments.entities;
+package com.vinelab.android.socialite.fbcomments.responses;
+
+import com.vinelab.android.socialite.fbcomments.model.FBComment;
 
 import java.util.ArrayList;
 

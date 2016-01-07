@@ -4,43 +4,45 @@ import android.os.Bundle;
 
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
-import com.vinelab.android.socialite.fbcomments.model.FBComment;
-import com.vinelab.android.socialite.fbcomments.responses.FBGetCommentResponse;
+import com.vinelab.android.socialite.fbcomments.model.FBUrlGraphObject;
+import com.vinelab.android.socialite.fbcomments.responses.FBGetUrlObjectResponse;
 import com.vinelab.android.socialite.fbcomments.responses.FBGraphResponse;
 
 import org.json.JSONObject;
 
 /**
- * Created by Nabil Souk on 11/17/2015.
+ * Created by Nabil Souk on 1/7/2016.
  *
  * <p>
- *     Class executing a Get Comment Graph request (fetching the details
- *     of a comment).
+ *     Class executing a Get Graph request, to fetch the graph object
+ *     of an external URL.
  * </p>
  */
-public class FBGetCommentRequest extends FBGraphRequest {
+public class FBGetUrlObjectRequest extends FBGraphRequest{
 
-    public FBGetCommentRequest(AccessToken accessToken) {
+    public FBGetUrlObjectRequest(AccessToken accessToken) {
         super(accessToken);
         setMethod(HttpMethod.GET);
     }
 
-    public void setProperties(String fields) {
+    public void setProperties(String url) {
         this.params = new Bundle();
-        if(fields != null)  this.params.putString("fields", fields);
+        if(url != null)     this.params.putString("id", url);
     }
+
 
     @Override
     public FBGraphResponse processResponse(JSONObject graphObject) {
         FBGraphResponse graphResponse;
         try {
-            FBComment comment = new FBComment(graphObject);
+            FBUrlGraphObject openGraphObject = new FBUrlGraphObject(graphObject);
             // create response object
-            graphResponse = new FBGetCommentResponse(comment);
+            graphResponse = new FBGetUrlObjectResponse(openGraphObject);
         }
         catch (Exception e) {
             graphResponse = null;
         }
         return graphResponse;
     }
+
 }

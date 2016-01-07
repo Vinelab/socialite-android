@@ -9,7 +9,7 @@ import com.facebook.FacebookRequestError;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
-import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBGraphResponse;
 import com.vinelab.android.socialite.fbcomments.listeners.OnGraphRequestListener;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdge;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphError;
@@ -25,7 +25,7 @@ import org.json.JSONObject;
  */
 public abstract class FBGraphRequest {
     AccessToken accessToken = null;
-    String target = "me"; // default
+    String target = ""; // default empty
     FBGraphEdge edge = null;
     Bundle params = null;
     HttpMethod method = HttpMethod.GET; // default
@@ -82,7 +82,7 @@ public abstract class FBGraphRequest {
      * target and the edge if set.
      */
     private String getGraphPath() {
-        return target + (edge != null? "/" + edge.getString(): "");
+        return target + (edge != null? "/" + edge.getString(): "/");
     }
 
     /**

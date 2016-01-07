@@ -1,8 +1,5 @@
 package com.vinelab.android.socialite.fbcomments.utils;
 
-import com.vinelab.android.socialite.fbcomments.entities.FBComment;
-import com.vinelab.android.socialite.fbcomments.entities.FBCommentAuthor;
-
 /**
  * Created by Nabil on 11/17/2015.
  *

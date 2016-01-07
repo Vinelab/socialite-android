@@ -1,4 +1,4 @@
-package com.vinelab.android.socialite.fbcomments.entities;
+package com.vinelab.android.socialite.fbcomments.responses;
 
 /**
  * Created by Nabil Souk on 11/16/2015.

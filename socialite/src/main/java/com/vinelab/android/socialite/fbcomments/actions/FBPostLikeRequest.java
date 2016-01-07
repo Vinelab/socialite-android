@@ -2,8 +2,8 @@ package com.vinelab.android.socialite.fbcomments.actions;
 
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
-import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
-import com.vinelab.android.socialite.fbcomments.entities.FBLikeResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBGraphResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBLikeResponse;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdge;
 
 import org.json.JSONObject;

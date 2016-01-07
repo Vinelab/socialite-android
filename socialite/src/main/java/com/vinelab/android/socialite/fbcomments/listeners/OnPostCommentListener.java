@@ -1,6 +1,6 @@
 package com.vinelab.android.socialite.fbcomments.listeners;
 
-import com.vinelab.android.socialite.fbcomments.entities.FBPostCommentResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBPostCommentResponse;
 
 /**
  * Created by Nabil Souk on 11/17/2015.

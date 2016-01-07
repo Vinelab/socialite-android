@@ -4,9 +4,9 @@ import android.os.Bundle;
 
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
-import com.vinelab.android.socialite.fbcomments.entities.FBComment;
-import com.vinelab.android.socialite.fbcomments.entities.FBGetCommentsResponse;
-import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
+import com.vinelab.android.socialite.fbcomments.model.FBComment;
+import com.vinelab.android.socialite.fbcomments.responses.FBGetCommentsResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBGraphResponse;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdge;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 
@@ -34,6 +34,11 @@ public class FBGetCommentsRequest extends FBGraphRequest {
         if(after != null && !after.isEmpty())    params.putString("after", after);
         params.putBoolean("summary", true);
     }
+
+    /*public void setProperties(String id, String fields, FBGraphUtils.COMMENTS_ORDER order, int limit, String after) {
+        setProperties(fields, order, limit, after);
+        if(id != null)  this.params.putString("ids", id);
+    }*/
 
     @Override
     public FBGraphResponse processResponse(JSONObject graphObject) {
