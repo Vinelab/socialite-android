@@ -1,4 +1,6 @@
-package com.vinelab.android.socialite.fbcomments.entities;
+package com.vinelab.android.socialite.fbcomments.responses;
+
+import com.vinelab.android.socialite.fbcomments.model.FBComment;
 
 /**
  * Created by Nabil Souk on 11/16/2015.
@@ -8,7 +10,7 @@ package com.vinelab.android.socialite.fbcomments.entities;
  *     fetching a Facebook comment.
  * </p>
  */
-public class FBGetCommentResponse extends FBGraphResponse{
+public class FBGetCommentResponse extends FBGraphResponse {
     FBComment comment;
 
     public FBGetCommentResponse(FBComment comment) {

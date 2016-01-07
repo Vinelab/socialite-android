@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
-import com.vinelab.android.socialite.fbcomments.entities.FBGraphResponse;
-import com.vinelab.android.socialite.fbcomments.entities.FBPostCommentResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBGraphResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBPostCommentResponse;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphEdge;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 
