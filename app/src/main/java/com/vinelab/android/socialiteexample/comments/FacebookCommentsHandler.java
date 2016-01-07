@@ -15,22 +15,24 @@ import android.widget.ProgressBar;
 import com.facebook.AccessToken;
 import com.vinelab.android.socialite.SocialiteCredentials;
 import com.vinelab.android.socialite.SocialiteUtils;
-import com.vinelab.android.socialite.fbcomments.FBGraphRequestGenerator;
 import com.vinelab.android.socialite.fbcomments.actions.FBDeleteLikeRequest;
 import com.vinelab.android.socialite.fbcomments.actions.FBGetCommentRequest;
 import com.vinelab.android.socialite.fbcomments.actions.FBGetCommentsRequest;
+import com.vinelab.android.socialite.fbcomments.actions.FBGetUrlObjectRequest;
 import com.vinelab.android.socialite.fbcomments.actions.FBGraphRequest;
 import com.vinelab.android.socialite.fbcomments.actions.FBPostCommentRequest;
 import com.vinelab.android.socialite.fbcomments.actions.FBPostLikeRequest;
-import com.vinelab.android.socialite.fbcomments.entities.FBComment;
-import com.vinelab.android.socialite.fbcomments.entities.FBGetCommentResponse;
-import com.vinelab.android.socialite.fbcomments.entities.FBLikeResponse;
-import com.vinelab.android.socialite.fbcomments.entities.FBPostCommentResponse;
-import com.vinelab.android.socialite.fbcomments.entities.FBGetCommentsResponse;
 import com.vinelab.android.socialite.fbcomments.listeners.OnGetCommentListener;
 import com.vinelab.android.socialite.fbcomments.listeners.OnGetCommentsListener;
+import com.vinelab.android.socialite.fbcomments.listeners.OnGetUrlObjectListener;
 import com.vinelab.android.socialite.fbcomments.listeners.OnLikeRequestListener;
 import com.vinelab.android.socialite.fbcomments.listeners.OnPostCommentListener;
+import com.vinelab.android.socialite.fbcomments.model.FBComment;
+import com.vinelab.android.socialite.fbcomments.responses.FBGetCommentResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBGetCommentsResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBGetUrlObjectResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBLikeResponse;
+import com.vinelab.android.socialite.fbcomments.responses.FBPostCommentResponse;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphError;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 import com.vinelab.android.socialite.login.facebook.FacebookLoginProvider;
@@ -48,16 +50,17 @@ import java.util.Collection;
 public class FacebookCommentsHandler {
     Activity activity;
     ListView lvComments;
-    String objectId;
     View listFooter;
     ProgressBar pbFooterLoading;
     Button btnFooterLoading;
     // tools
     CommentsAdapter commentsAdapter;
-    FBGraphRequestGenerator commentsManager;
+//    FBGraphRequestGenerator commentsManager;
     FBRequestQueue requestQueue;
     OnFacebookCommentsListener fbCommentsListener;
     // comments
+    String url = null;
+    String objectId;
     int limit = 10;
     ArrayList<FBComment> arrayComments = null;
     String after = null;
@@ -65,12 +68,17 @@ public class FacebookCommentsHandler {
 
     public FacebookCommentsHandler(Activity activity) {
         this.activity = activity;
-        this.commentsManager = new FBGraphRequestGenerator();
+//        this.commentsManager = new FBGraphRequestGenerator();
         this.requestQueue = new FBRequestQueue();
     }
 
     public void setConfiguration(String objectId, int limit) {
         this.objectId = objectId;
+        this.limit = limit;
+    }
+
+    public void setUrlConfiguration(String url, int limit) {
+        this.url = url;
         this.limit = limit;
     }
 
@@ -232,13 +240,36 @@ public class FacebookCommentsHandler {
      * Executes a new fetch commments request.
      * @param showLoadingUI Wheteher or not to show the loading UI.
      */
-    private void requestNextCommentsSet(boolean showLoadingUI) {
+    private void requestNextCommentsSet(final boolean showLoadingUI) {
         // show loading in list footer
         if(showLoadingUI)   updateFooter(true, false);
         // set flag
         fetchingComments = true;
-        // execute request
-        generateGetCommentsRequest().execute();
+        // check if object id is ready
+        if(objectId != null) {
+            // execute request
+            generateGetCommentsRequest().execute();
+        } else { // get object id from url details
+            // fetch url details
+            generateGetUrlObjectRequest(this.url, new OnGetUrlObjectListener() {
+                @Override
+                public void onComplete(FBGetUrlObjectResponse fbGetUrlObjectResponse) {
+                    // url details object fetched
+                    // get object id from it
+                    objectId = fbGetUrlObjectResponse.getOpenGraphObject().getId();
+                    // re-trigger loading next set
+                    requestNextCommentsSet(showLoadingUI);
+                }
+
+                @Override
+                public void onError(FBGraphError.ERROR error) {
+                    // remove flag
+                    fetchingComments = false;
+                    // show load more in footer if permitted
+                    if(showLoadingUI)   updateFooter(false, true);
+                }
+            }).execute();
+        }
     }
 
     /**
@@ -286,7 +317,7 @@ public class FacebookCommentsHandler {
 
     public void postNewComment(String message, final boolean requestPermissionIfNeeded) {
         // generate graph request
-        final FBPostCommentRequest request = commentsManager.generatePostCommentRequest(objectId, message, new OnPostCommentListener() {
+        final FBPostCommentRequest request = generatePostCommentRequest(message, new OnPostCommentListener() {
             @Override
             public void onComplete(FBPostCommentResponse fbCommentResponse) {
                 // handle the new comment added
@@ -481,6 +512,14 @@ public class FacebookCommentsHandler {
     }
 
     // fb graph requests
+
+    private FBGetUrlObjectRequest generateGetUrlObjectRequest(String url, OnGetUrlObjectListener getUrlObjectListener) {
+        FBGetUrlObjectRequest request = new FBGetUrlObjectRequest(AccessToken.getCurrentAccessToken());
+        request.setTarget("");
+        request.setProperties(url);
+        request.setGraphRequestListener(getUrlObjectListener);
+        return request;
+    }
 
     private FBGetCommentsRequest generateGetCommentsRequest() {
         FBGetCommentsRequest request = new FBGetCommentsRequest(AccessToken.getCurrentAccessToken());

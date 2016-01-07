@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.vinelab.android.socialite.fbcomments.entities.FBComment;
-import com.vinelab.android.socialite.fbcomments.entities.FBCommentAuthor;
+import com.vinelab.android.socialite.fbcomments.model.FBComment;
+import com.vinelab.android.socialite.fbcomments.model.FBCommentAuthor;
 import com.vinelab.android.socialite.fbcomments.utils.FBDateUtils;
 import com.vinelab.android.socialite.fbcomments.utils.FBGraphUtils;
 import com.vinelab.android.socialiteexample.R;

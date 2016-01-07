@@ -52,6 +52,7 @@ public class FacebookCommentsActivity extends Activity {
     void configureCommentsHandler() {
         commentsHandler = new FacebookCommentsHandler(this);
         commentsHandler.setConfiguration("1600885026851099_1618045101801758", 10);
+        /*commentsHandler.setUrlConfiguration("url", 10);*/
         commentsHandler.setUIElements(lvComments);
         commentsHandler.setListener(facebookCommentsListener);
     }
