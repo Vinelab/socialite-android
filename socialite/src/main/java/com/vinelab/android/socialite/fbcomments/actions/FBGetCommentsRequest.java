@@ -59,14 +59,16 @@ public class FBGetCommentsRequest extends FBGraphRequest {
                 resultComments.add(comment);
             }
             // get paging
-            JSONObject jsonPaging = graphObject.getJSONObject("paging");
-            if(jsonPaging != null) {
-                if(jsonPaging.has("cursors")) {
-                    JSONObject jsonCursors = jsonPaging.getJSONObject("cursors");
-                    if(jsonCursors != null && jsonCursors.has("after"))
-                        after = jsonCursors.getString("after");
+            if(graphObject.has("paging")) {
+                JSONObject jsonPaging = graphObject.getJSONObject("paging");
+                if(jsonPaging != null) {
+                    if(jsonPaging.has("cursors")) {
+                        JSONObject jsonCursors = jsonPaging.getJSONObject("cursors");
+                        if(jsonCursors != null && jsonCursors.has("after"))
+                            after = jsonCursors.getString("after");
+                    }
+                    if(jsonPaging.has("next"))  hasNext = true;
                 }
-                if(jsonPaging.has("next"))  hasNext = true;
             }
             // get total count, and if user can comment
             if(graphObject.has("summary")) {
