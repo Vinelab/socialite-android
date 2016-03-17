@@ -31,5 +31,5 @@ public interface SocialiteShareListener {
      * @param provider The name of the provider executing the login.
      * @param error The error message returned by the provider.
      */
-    void onError(SocialiteUtils.SOCIALITE_PROVIDER provider, @Nullable String error);
+    void onError(SocialiteUtils.SOCIALITE_PROVIDER provider, int errorCode, @Nullable String error);
 }

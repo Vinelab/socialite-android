@@ -92,8 +92,16 @@ public class ShareActivity extends Activity implements View.OnClickListener{
         }
 
         @Override
-        public void onError(SocialiteUtils.SOCIALITE_PROVIDER provider, @Nullable String error) {
-            Toast.makeText(getApplicationContext(), provider.toString() + " share failed: error=" + (error != null ? error : "unknown"), Toast.LENGTH_SHORT).show();
+        public void onError(SocialiteUtils.SOCIALITE_PROVIDER provider, int errorCode, @Nullable String error) {
+            String errorMessage = error != null ? error : "unknown";
+            // check if from fb
+            if (provider == SocialiteUtils.SOCIALITE_PROVIDER.FACEBOOK) {
+                // check error code
+                if (errorCode == FacebookShareProvider.ERROR_CANT_SHOW_DIALOG) {
+                    errorMessage = "Unable to open the share dialog";
+                }
+            }
+            Toast.makeText(getApplicationContext(), provider.toString() + " share failed: error=" + errorMessage, Toast.LENGTH_SHORT).show();
         }
     };
 

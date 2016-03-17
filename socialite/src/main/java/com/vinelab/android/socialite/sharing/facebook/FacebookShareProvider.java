@@ -29,6 +29,19 @@ public class FacebookShareProvider {
     private static FacebookShareProvider shareProvider;
     private CallbackManager callbackManager;
     private SocialiteShareListener shareListener;
+    // error codes
+    /**
+     * Indicates an unknown error occured while executing the operation.
+     */
+    public static int ERROR_UNKNOWN = 0;
+    /**
+     * Indicates that the sdk cannot show the specified share dialog.
+     */
+    public static int ERROR_CANT_SHOW_DIALOG = 1;
+    /**
+     * Indicates that the sdk has returned an error object.
+     */
+    public static int ERROR_SDK = 2;
 
     private FacebookShareProvider() {
         initialize();
@@ -71,7 +84,7 @@ public class FacebookShareProvider {
         }
         else {
             // broadcast
-            broadcastShareError(activity.getString(R.string.fb_share_present_error));
+            broadcastShareError(ERROR_CANT_SHOW_DIALOG, null);
         }
     }
 
@@ -99,7 +112,7 @@ public class FacebookShareProvider {
         }
         else {
             // broadcast
-            broadcastShareError(activity.getString(R.string.fb_share_present_error));
+            broadcastShareError(ERROR_CANT_SHOW_DIALOG, null);
         }
     }
 
@@ -129,7 +142,7 @@ public class FacebookShareProvider {
                 String postId = result.getPostId();
                 broadcastShareSuccess(postId);
             }
-            else    broadcastShareError(null);
+            else    broadcastShareError(ERROR_UNKNOWN, null);
         }
 
         @Override
@@ -139,7 +152,7 @@ public class FacebookShareProvider {
 
         @Override
         public void onError(FacebookException error) {
-            broadcastShareError(error != null? error.getMessage(): null);
+            broadcastShareError(ERROR_SDK, error != null? error.getMessage(): null);
         }
     };
 
@@ -169,8 +182,8 @@ public class FacebookShareProvider {
      * Broadcasts a share error flag.
      * @param error The error message returned by the SDK.
      */
-    private void broadcastShareError(@Nullable String error) {
-        if(shareListener != null)   shareListener.onError(FacebookConfig.provider, error);
+    private void broadcastShareError(int errorCode, @Nullable String error) {
+        if(shareListener != null)   shareListener.onError(FacebookConfig.provider, errorCode, error);
     }
 
     /**
