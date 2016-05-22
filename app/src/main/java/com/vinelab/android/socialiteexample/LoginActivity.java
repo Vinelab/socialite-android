@@ -5,15 +5,22 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
 
 import com.vinelab.android.socialite.SocialiteCredentials;
 import com.vinelab.android.socialite.SocialiteUtils;
+import com.vinelab.android.socialite.login.SocialiteUserProfile;
 import com.vinelab.android.socialite.login.facebook.FacebookLoginProvider;
 import com.vinelab.android.socialite.login.listeners.SocialiteLoginListener;
+import com.vinelab.android.socialite.login.listeners.SocialiteProfileListener;
 import com.vinelab.android.socialite.login.listeners.SocialiteUserStateListener;
 import com.vinelab.android.socialite.login.twitter.TwitterLoginProvider;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class LoginActivity extends Activity implements View.OnClickListener{
     ProgressDialog pdLoader;
@@ -62,7 +69,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 // show loader
                 displayLoader();
                 // login
-                FacebookLoginProvider.getInstance().logInWithReadPermissions(LoginActivity.this, null, loginListener);
+                FacebookLoginProvider.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "email"), loginListener);
             }
         });
     }
@@ -96,6 +103,20 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             dismissLoader();
             // show result
             Toast.makeText(getApplicationContext(), provider.toString() + " login success: & userId=" + credentials.getUserId(), Toast.LENGTH_SHORT).show();
+            /*// check if fb
+            if (provider == SocialiteUtils.SOCIALITE_PROVIDER.FACEBOOK) {
+                FacebookLoginProvider.getInstance().fetchSessionUser(new SocialiteProfileListener() {
+                    @Override
+                    public void onSuccess(SocialiteUtils.SOCIALITE_PROVIDER provider, SocialiteUserProfile profile) {
+                        return;
+                    }
+
+                    @Override
+                    public void onError(SocialiteUtils.SOCIALITE_PROVIDER provider, @Nullable String error) {
+                        return;
+                    }
+                });
+            }*/
         }
 
         @Override

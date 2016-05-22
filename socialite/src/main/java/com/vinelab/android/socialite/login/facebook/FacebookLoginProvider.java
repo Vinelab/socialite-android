@@ -2,6 +2,8 @@ package com.vinelab.android.socialite.login.facebook;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
@@ -9,11 +11,17 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.vinelab.android.socialite.SocialiteUtils;
+import com.vinelab.android.socialite.login.SocialiteUserProfile;
 import com.vinelab.android.socialite.login.listeners.SocialiteLoginListener;
+import com.vinelab.android.socialite.login.listeners.SocialiteProfileListener;
 import com.vinelab.android.socialite.login.listeners.SocialiteUserStateListener;
+
+import org.json.JSONObject;
 
 import java.util.Collection;
 
@@ -179,6 +187,53 @@ public class FacebookLoginProvider {
      */
     public void logout() {
         LoginManager.getInstance().logOut();
+    }
+
+    // USER PROFILE //
+
+    /**
+     * Requests the user of the current active session. If there's
+     * an active session with the SDK, the user profile should be retrned.
+     * @param listener The callback listener
+     */
+    public void fetchSessionUser(@NonNull final SocialiteProfileListener listener) {
+        // get current session
+        final AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        // check if not valid
+        if (accessToken == null || accessToken.isExpired()) {
+            // broadcast error
+            listener.onError(SocialiteUtils.SOCIALITE_PROVIDER.FACEBOOK, "Session Expired");
+            return;
+        }
+        // create request
+        GraphRequest request = GraphRequest.newMeRequest(
+                accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject me, GraphResponse response) {
+                        if (response.getError() != null) {
+                            // broadcast error
+                            listener.onError(SocialiteUtils.SOCIALITE_PROVIDER.FACEBOOK, response.getError().getErrorMessage());
+                        } else {
+                            // {"id":"","first_name":"","last_name":"","email":"","gender":""}
+                            String id = me.optString("id");
+                            String name = me.optString("name");
+                            String email = me.optString("email");
+                            // create profile object
+                            final SocialiteUserProfile profile = new SocialiteUserProfile();
+                            profile.id = id;
+                            profile.name = name;
+                            profile.email = email;
+                            // broadcast result back
+                            listener.onSuccess(SocialiteUtils.SOCIALITE_PROVIDER.FACEBOOK, profile);
+                        }
+                    }
+                });
+        // set params for the desired fields
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id, name, email");
+        request.setParameters(parameters);
+        // trigger request
+        request.executeAsync();
     }
 
     // provider callbacks //
