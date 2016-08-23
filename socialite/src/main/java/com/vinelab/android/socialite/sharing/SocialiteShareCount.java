@@ -8,12 +8,12 @@ package com.vinelab.android.socialite.sharing;
  * </p>
  */
 public class SocialiteShareCount {
-    private final int count;
     private final String link;
+    private final int count;
 
-    public SocialiteShareCount(int count, String link) {
-        this.count = count;
+    public SocialiteShareCount(String link, int count) {
         this.link = link;
+        this.count = count;
     }
 
     public int getCount() {

@@ -54,7 +54,7 @@ public class TwitterShareCountProvider {
                     JSONObject jsonObject = new JSONObject(response);
                     int count = jsonObject.getInt("count");
                     String url = jsonObject.getString("url");
-                    shareCount = new SocialiteShareCount(count, url);
+                    shareCount = new SocialiteShareCount(url, count);
                 }
             }
             catch (Exception e) {}

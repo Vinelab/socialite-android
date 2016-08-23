@@ -17,6 +17,7 @@ public class FacebookShareCountProvider {
 
     public static SocialiteShareCount getShareCount(final String link) {
         int shareCount = 0;
+        int commentCount = 0;
         String shareLink = link;
         // check if link or listener null
         if(link != null && !link.isEmpty()) {
@@ -29,7 +30,8 @@ public class FacebookShareCountProvider {
                     // get count from share object
                     if (!jsonObject.isNull("share")) {
                         JSONObject jsonShare = jsonObject.getJSONObject("share");
-                        shareCount = jsonShare.getInt("share_count");
+                        if (!jsonShare.isNull("share_count"))   shareCount = jsonShare.getInt("share_count");
+                        if (!jsonShare.isNull("comment_count"))   commentCount = jsonShare.getInt("comment_count");
                     }
                     // get url
                     if (!jsonObject.isNull("id")) {
@@ -39,6 +41,6 @@ public class FacebookShareCountProvider {
             }
             catch (Exception e) {}
         }
-        return new SocialiteShareCount(shareCount, shareLink);
+        return new FacebookShareCount(shareLink, shareCount, commentCount);
     }
 }
