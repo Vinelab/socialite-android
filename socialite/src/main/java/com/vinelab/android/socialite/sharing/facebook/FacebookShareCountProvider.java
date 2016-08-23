@@ -16,7 +16,8 @@ public class FacebookShareCountProvider {
     private static final String apiUrl = "http://graph.facebook.com/?id=";
 
     public static SocialiteShareCount getShareCount(final String link) {
-        SocialiteShareCount shareCount = null;
+        int shareCount = 0;
+        String shareLink = link;
         // check if link or listener null
         if(link != null && !link.isEmpty()) {
             // request count
@@ -25,14 +26,19 @@ public class FacebookShareCountProvider {
                 final String response = DataAccess.sendGetRequest(request);
                 if(response != null && !response.isEmpty()) {
                     JSONObject jsonObject = new JSONObject(response);
-                    int count = jsonObject.getInt("shares");
-                    String url = jsonObject.getString("id");
-                    shareCount = new SocialiteShareCount(count, url);
+                    // get count from share object
+                    if (!jsonObject.isNull("share")) {
+                        JSONObject jsonShare = jsonObject.getJSONObject("share");
+                        shareCount = jsonShare.getInt("share_count");
+                    }
+                    // get url
+                    if (!jsonObject.isNull("id")) {
+                        shareLink = jsonObject.getString("id");
+                    }
                 }
             }
             catch (Exception e) {}
         }
-
-        return shareCount;
+        return new SocialiteShareCount(shareCount, shareLink);
     }
 }
