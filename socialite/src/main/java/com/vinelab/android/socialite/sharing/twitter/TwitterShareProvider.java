@@ -52,6 +52,7 @@ public class TwitterShareProvider {
         if(requestCode == TwitterConfig.COMPOSER_REQUEST_CODE && shareListener != null) {
             if(resultCode == Activity.RESULT_CANCELED)  shareListener.onCancel(TwitterConfig.provider);
             if(resultCode == Activity.RESULT_OK)    shareListener.onSuccess(TwitterConfig.provider, null);
+            shareListener = null;
         }
     }
 }

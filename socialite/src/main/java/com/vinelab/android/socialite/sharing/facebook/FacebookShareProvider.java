@@ -175,6 +175,7 @@ public class FacebookShareProvider {
             FacebookShareExtras extras = new FacebookShareExtras(postId);
             // broadcast
             shareListener.onSuccess(FacebookConfig.provider, extras);
+            removeListener();
         }
     }
 
@@ -183,13 +184,26 @@ public class FacebookShareProvider {
      * @param error The error message returned by the SDK.
      */
     private void broadcastShareError(int errorCode, @Nullable String error) {
-        if(shareListener != null)   shareListener.onError(FacebookConfig.provider, errorCode, error);
+        if(shareListener != null)   {
+            shareListener.onError(FacebookConfig.provider, errorCode, error);
+            removeListener();
+        }
     }
 
     /**
      * Broadcasts a share cancelled flag.
      */
     private void broadcastShareCancel() {
-        if(shareListener != null)   shareListener.onCancel(FacebookConfig.provider);
+        if(shareListener != null)   {
+            shareListener.onCancel(FacebookConfig.provider);
+            removeListener();
+        }
+    }
+
+    /**
+     * Clears registered listener.
+     */
+    private void removeListener() {
+        this.shareListener = null;
     }
 }
