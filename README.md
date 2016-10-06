@@ -9,7 +9,7 @@ The **socialite** library provides a set of those plugins. Currently, it covers 
 Add the gradle dependency to your module
 
 ```xml
-compile 'com.vinelab.android.socialite:socialite:1.1.6'
+compile 'com.vinelab.android.socialite:socialite:1.1.8'
 ```
 
 In case an error appeared related to Fabric, add the following maven repository.
